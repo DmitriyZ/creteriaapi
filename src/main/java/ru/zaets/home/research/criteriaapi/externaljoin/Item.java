@@ -1,15 +1,13 @@
-package ru.zaets.home.research.criteriaapi.entity;
+package ru.zaets.home.research.criteriaapi.externaljoin;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -18,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table
-public class Cart {
+public class Item {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -36,13 +34,4 @@ public class Cart {
 
     @Column(name = "name")
     private String name;
-
-    @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(
-            name = "cart_to_item_link",
-            joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id")
-    )
-    @BatchSize(size = 100)
-    private List<Item> items;
 }

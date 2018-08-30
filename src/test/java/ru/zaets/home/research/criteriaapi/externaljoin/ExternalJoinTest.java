@@ -1,4 +1,4 @@
-package ru.zaets.home.research.criteriaapi;
+package ru.zaets.home.research.criteriaapi.externaljoin;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -8,11 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.zaets.home.research.criteriaapi.entity.Cart;
-import ru.zaets.home.research.criteriaapi.entity.Cart_;
-import ru.zaets.home.research.criteriaapi.entity.Item;
-import ru.zaets.home.research.criteriaapi.repository.CartRepository;
-import ru.zaets.home.research.criteriaapi.repository.ItemRepository;
+import ru.zaets.home.research.criteriaapi.ApplicationConfig;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.ListJoin;
@@ -25,7 +21,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {ApplicationConfig.class})
 @PropertySource("classpath*:application.properties")
-public class CriteriaapiApplicationTest {
+public class ExternalJoinTest {
 
     @Autowired
     ItemRepository itemRepository;
@@ -49,7 +45,7 @@ public class CriteriaapiApplicationTest {
     }
 
     @Test
-    public void contextLoads() {
+    public void joinTest() {
         itemRepository.save(Item.builder().name("one").build());
         itemRepository.save(Item.builder().name("two").build());
 
@@ -74,6 +70,5 @@ public class CriteriaapiApplicationTest {
         all.forEach(System.out::println);
 
     }
-
 
 }

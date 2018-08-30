@@ -14,12 +14,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Map;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "ru.zaets.home.research.criteriaapi.repository")
+@EnableJpaRepositories(basePackages = "ru.zaets.home.research.criteriaapi")
 @ComponentScan(basePackages = "ru.zaets.home.research.criteriaapi")
 @EnableTransactionManagement
-class ApplicationConfig {
+public class ApplicationConfig {
 
     @Bean
     public DataSource dataSource() {
@@ -35,7 +36,7 @@ class ApplicationConfig {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("ru.zaets.home.research.criteriaapi.entity");
+        factory.setPackagesToScan("ru.zaets.home.research.criteriaapi");
         factory.setDataSource(dataSource());
         factory.afterPropertiesSet();
 
